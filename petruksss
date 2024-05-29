@@ -1,1 +1,56 @@
+#include <iostream>
+#include <vector>
+#include <cstring>
 
+using namespace std;
+
+bool opera(char o) {
+    return (o == '*' || o == '/' || o == '+' || o == '-' || o == '%');
+}
+vector<string> strToInfix(string inputStr) {
+    vector<string> infix;
+    string angka;
+
+    for (size_t i = 0; i < inputStr.size(); i++) {
+        char op = inputStr[i];
+
+        if (isspace(op)) {
+            continue;
+        }
+        else if (isdigit(op)) {
+            angka += op;
+        } 
+        else if (op == '-' && (i == 0 || opera(inputStr[i - 1]))) {
+            if(opera(inputStr[i-1]) || inputStr[i+1] == '('){
+                infix.push_back("-1");
+                infix.push_back("*");
+            }
+            else{
+                angka += op;
+            }
+        } 
+        else {
+            if (!angka.empty()) {
+                infix.push_back(angka);
+                angka.clear();
+            }
+            infix.push_back(string(1, op));
+        }
+    }
+
+    if (!angka.empty()) {
+        infix.push_back(angka);
+    }
+    return infix;
+}
+
+int main(){
+    string input;
+    getline(cin, input);
+    vector<string> infix = strToInfix(input);
+    for (const string& hasil : infix) {
+        cout << hasil << " ";
+    }
+    cout << endl;
+    return 0;
+}
