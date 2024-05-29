@@ -81,7 +81,26 @@ vector<string> infixToPostfix(vector<string>& infixArr) {
     }
     return postfix;
 }
-        
+
+vector<string> evaluatePostfix(const vector <string>& postfixArr){
+    stack<int> evalStack;
+
+    for(const string& arr : postfixArr){
+        if(isdigit(arr[0]) || (arr.length() > 1 && isdigit(arr[1]))){
+            evalStack.push(stoi(arr));
+        }else {
+            int a = evalStack.top();
+            evalStack.pop();
+            int b = evalStack.top();
+            evalStack.pop();
+            if (arr == "+") evalStack.push(a+b);
+            else if (arr == "-") evalStack.push(a-b);
+            else if (arr == "*") evalStack.push(a*b);
+            else if (arr == "/") evalStack.push(a/b);
+            else if (arr == "%") evalStack.push(a%b);
+        }
+    }
+}
 
 int main(){
     string input;
@@ -101,6 +120,6 @@ int main(){
         cout << arr << " ";
     }
     cout << endl;
-    
+
     return 0;
 }
