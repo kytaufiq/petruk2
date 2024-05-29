@@ -87,6 +87,8 @@ int main(){
     string input;
     getline(cin, input);
     vector<string> infix = strToInfix(input);
+    vector<postfix = infixToPostfix(infix);
+
     for (const string& hasil : infix) {
         cout << hasil << " ";
     }
