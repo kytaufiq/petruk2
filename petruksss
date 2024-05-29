@@ -44,6 +44,38 @@ vector<string> strToInfix(string inputStr) {
     return infix;
 }
 
+vector<string> infixToPostfix(vector<string>& infixArr) {
+    vector<string> postfix;
+    stack<string> opStack;
+
+    for (const string& arr : infixArr) {
+        if (isdigit(arr[0]) || (arr.length() > 1 && isdigit(arr[1]))) {
+            postfix.push_back(arr);
+        } else if (arr == "(") {
+            opStack.push(arr);
+        } else if (arr == ")") {
+            while (!opStack.empty() && opStack.top() != "(") {
+                postfix.push_back(opStack.top());
+                opStack.pop();
+            }
+            opStack.pop();
+        } else {
+            while (!opStack.empty() && precedence(opStack.top()[0]) >= precedence(arr[0])) {
+                postfix.push_back(opStack.top());
+                opStack.pop();
+            }
+            opStack.push(arr);
+        }
+    }
+
+    while (!opStack.empty()) {
+        postfix.push_back(opStack.top());
+        opStack.pop();
+    }
+    return postfix;
+}
+        
+
 int main(){
     string input;
     getline(cin, input);
