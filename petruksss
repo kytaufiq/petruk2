@@ -87,11 +87,20 @@ int main(){
     string input;
     getline(cin, input);
     vector<string> infix = strToInfix(input);
-    vector<postfix = infixToPostfix(infix);
+    vector<string> postfix = infixToPostfix(infix);
 
+
+    cout << "Infix: ";
     for (const string& hasil : infix) {
         cout << hasil << " ";
     }
     cout << endl;
+
+    cout << "Postfix: ";
+    for (const string& arr : postfix){
+        cout << arr << " ";
+    }
+    cout << endl;
+    
     return 0;
 }
