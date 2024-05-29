@@ -11,7 +11,7 @@ bool opera(char o) {
 
 int precedence(char opr){
    if(opr == '+'  ||  opr == '-')return 1;
-   if(opr == '='  ||  opr == '/' || opr == '%')return 2;
+   if(opr == '*'  ||  opr == '/' || opr == '%')return 2;
    return 0;
 }
 vector<string> strToInfix(string inputStr) {
