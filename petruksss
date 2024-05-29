@@ -1,11 +1,18 @@
 #include <iostream>
 #include <vector>
 #include <cstring>
+#include <stack>
 
 using namespace std;
 
 bool opera(char o) {
     return (o == '*' || o == '/' || o == '+' || o == '-' || o == '%');
+}
+
+int precedence(char opr){
+   if(opr == '+'  ||  opr == '-')return 1;
+   if(opr == '='  ||  opr == '/' || opr == '%')return 2;
+   return 0;
 }
 vector<string> strToInfix(string inputStr) {
     vector<string> infix;
